@@ -1,5 +1,6 @@
 
 import 'package:bloc_demo_app/lib/features/home/ui/product_tile_widget.dart';
+import 'package:bloc_demo_app/lib/servies/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    AuthService authService = AuthService();
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
       listenWhen: (previous, current) => current is HomeActionState,
@@ -61,6 +63,7 @@ class _HomePageState extends State<HomePage> {
                 backgroundColor: Colors.teal,
                 title: const Text('Asmita\'s Grocery App'),
                 actions: [
+                  IconButton(onPressed: authService.handleSignOut, icon: Icon(Icons.logout)),
                   IconButton(
                       onPressed: () {
                         homeBloc.add(HomeWishListButtonNavigateEvent());
